@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_project/provider.dart';
-import 'package:riverpod_project/state_provider.dart';
+import 'package:riverpod_project/providers/provider.dart';
+
+import 'providers/state_provider.dart';
+import 'views/multi_state_provider_view.dart';
+import 'views/state_notifier_provider_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,7 +58,13 @@ class _MyHomePageState extends State<MyHomePage> {
             }, child: Text('Provider')),
             ElevatedButton(onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=> StateProviderExample()));
-            }, child: Text('State Provider'))
+            }, child: Text('State Provider')),
+            ElevatedButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> MultiStateProviderView()));
+            }, child: Text('Multi State Provider')),
+            ElevatedButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> StateNotifierProviderView()));
+            }, child: Text('State Notifier Provider')),
           ],
         ),
       ),

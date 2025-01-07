@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_project/providers/multi_state_provider.dart';
 
-class MultiStateProviderView extends ConsumerWidget {
-  const MultiStateProviderView({super.key});
+class StateNotifierProviderView extends ConsumerWidget {
+  const StateNotifierProviderView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Multi State Provider'),
+        title: Text('State Notifier Provider'),
       ),
       body: Center(
         child: Column(
