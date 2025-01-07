@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_project/providers/multi_state_provider.dart';
+import 'package:riverpod_project/providers/state_notifier_provider.dart';
 
 class StateNotifierProviderView extends ConsumerWidget {
   const StateNotifierProviderView({super.key});
@@ -18,42 +19,39 @@ class StateNotifierProviderView extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Consumer(builder: (context, ref, child) {
-              final slider = ref.watch(sliderProvider).slider;
-              final show = ref.watch(sliderProvider).show;
-              print('sliderProvider');
-              return Column(
-                children: [
-                  Icon(
-                    show ? Icons.visibility_off : Icons.visibility,
-                    size: 50,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 200,
-                    width: 200,
-                    decoration:
-                        BoxDecoration(color: Colors.red.withOpacity(slider)),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Slider(
-                      value: slider,
-                      onChanged: (value) {
-                        final stateProvider = ref.read(sliderProvider.notifier);
-                        if (value == 1) {
-                          stateProvider.state = stateProvider.state
-                              .copyWith(slider: value, show: true);
-                        } else {
-                          stateProvider.state = stateProvider.state
-                              .copyWith(slider: value, show: false);
-                        }
-                      }),
-                ],
-              );
+              // final search = ref.watch(stateNotifierProvider).search;
+              final search = ref.watch((stateNotifierProvider).select((state)=> state.search));
+              print('stateNotifierProvider');
+              return Text(search,style: TextStyle(fontSize: 24),);
             }),
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: TextFormField(
+                // decoration:
+                onChanged: (value){
+                  ref.read(stateNotifierProvider.notifier).search(value);
+                },
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'search...'
+                ),
+
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Consumer(builder: (context, ref, child) {
+              final isShow = ref.watch((stateNotifierProvider).select((state)=> state.isShow));
+              print('isShow stateNotifierProvider');
+              return Switch(value: isShow, onChanged: (value){
+                ref.read(stateNotifierProvider.notifier).isSwitch(value);
+              });
+            }),
+
           ],
         ),
       ),
