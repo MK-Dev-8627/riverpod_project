@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_project/providers/provider.dart';
 
 import 'providers/state_provider.dart';
+import 'views/favourite/favourite_item_view.dart';
 import 'views/multi_state_provider_view.dart';
 import 'views/state_notifier_provider_view.dart';
 import 'views/todo_app_view.dart';
@@ -89,7 +90,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ToDoAppView()));
                 },
-                child: Text('ToDo App')),
+                child: Text('ToDo App')), ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => FavouriteView()));
+                },
+                child: Text('Favourite Items')),
           ],
         ),
       ),
